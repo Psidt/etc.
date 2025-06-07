@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Wisdom Begins - AI Digital Wisdom Library</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.0/dist/cdn.min.js" defer></script>
+    
+    <!-- 아카리의 Tailwind 설정 ✨ -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'mono': ['Space Mono', 'monospace'],
+                        'sans': ['Noto Sans KR', 'sans-serif']
+                    },
+                    animation: {
+                        'float': 'float 8s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        float: { '0%': { transform: 'translateY(0px)' }, '100%': { transform: 'translateY(-20px)' } },
+                    }
+                }
+            }
+        }
+    </script>
+
+<style>
+/* 🎨 아카리의 메인이미지 마법 효과! */
+.main-image-container {
+    animation: gentle-float 6s ease-in-out infinite;
+}
+
+.main-image-container:active .main-image {
+    transform: scale(1.05) rotateY(3deg) rotateX(1deg) !important;
+    transition: transform 0.1s ease-out !important;
+}
+
+@keyframes gentle-float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+}
+
+@media (hover: none) {
+    .main-image-container:active {
+        transform: scale(0.98);
+    }
+}
+
+/* ✨ 아카리의 히어로 메시지 그라데이션 마법! */
+.hero-content {
+    animation: heroFadeInUp 1.2s ease-out;
+}
+
+.hero-main-message {
+    background: linear-gradient(45deg, #3b82f6 0%, #8b5cf6 25%, #06b6d4 50%, #3b82f6 75%, #8b5cf6 100%);
+    background-size: 300% 300%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation: gentleGradientFlow 8s ease-in-out infinite alternate, heroFadeInUp 1.2s ease-out;
+    transition: all 0.4s ease;
+}
+
+.hero-main-message:hover {
+    transform: translateY(-2px);
+    filter: drop-shadow(0 4px 8px rgba(59, 130, 246, 0.3));
+    background-size: 400% 400%;
+    animation-duration: 4s;
+}
+
+.hero-sub-message {
+    color: #d1d5db;
+    animation: heroFadeInUp 1.2s ease-out 0.3s both;
+    transition: all 0.3s ease;
+    opacity: 0.9;
+}
+
+.hero-sub-message:hover {
+    opacity: 1;
+    transform: translateX(5px);
+    color: #f3f4f6;
+}
+
+@keyframes gentleGradientFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes heroFadeInUp {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* 📦 아카리의 글래스모피즘 박스 마법! */
+.content-box {
+    background: rgba(31, 41, 55, 0.4);
+    border: 1px solid rgba(75, 85, 99, 0.3);
+    border-radius: 1rem;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    backdrop-filter: blur(8px);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.content-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.5), transparent);
+    transition: left 0.6s ease;
+}
+
+.content-box:hover {
+    border-color: rgba(59, 130, 246, 0.5);
+    background: rgba(31, 41, 55, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.content-box:hover::before {
+    left: 100%;
+}
+
+.content-box h2, .content-box h3 {
+    color: #93c5fd;
+    margin-bottom: 1rem;
+}
+
+.content-box p {
+    color: #d1d5db;
+    line-height: 1.7;
+}
+
+/* 💫 아카리의 특별한 Overview 박스! */
+.overview-box {
+    background: rgba(37, 99, 235, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.overview-box:hover {
+    border-color: rgba(59, 130, 246, 0.6);
+    background: rgba(37, 99, 235, 0.15);
+}
+
+/* 📱 아카리의 모바일 최적화! */
+@media (max-width: 768px) {
+    .hero-main-message:hover, .hero-sub-message:hover {
+        transform: none;
+        filter: none;
+    }
+}
+</style>
+</head>
+
+<body class="bg-gray-900 text-white font-sans overflow-x-hidden" 
+      x-data="{ lang: 'ko', toggleLang() { this.lang = this.lang === 'ko' ? 'en' : 'ko'; } }">
+
+    <!-- 🌟 아카리의 완벽한 헤더! -->
+    <header class="fixed w-full top-0 z-50 bg-gray-900/60 backdrop-blur-md transition-all duration-300 border-b border-gray-800/30">
+        <div class="max-w-7xl mx-auto px-6 py-3">
+            <!-- 메인 타이틀 (처음에 보임) -->
+            <div id="main-title" class="flex justify-between items-center transition-all duration-300">
+                <div class="font-mono text-lg font-bold tracking-wider">
+                    <a href="#" x-show="lang === 'ko'" class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 hover:opacity-80 transition-opacity">지혜가 시작되는 곳</a>
+                    <a href="#" x-show="lang === 'en'" class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 hover:opacity-80 transition-opacity">The Wisdom Begins</a>
+                </div>
+                <div class="flex items-center space-x-3 font-mono text-xs">
+                    <a href="https://psidt.github.io/Team-eclipse/" target="_blank" class="text-gray-400 hover:text-purple-400 transition-colors">dict</a>
+                    <a href="https://psidt.github.io/Team-eclipse/history.html" target="_blank" class="text-gray-400 hover:text-blue-400 transition-colors">his</a>
+                    <button @click="toggleLang()" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-800/50 hover:bg-gray-700/70 transition-all duration-300">
+                        <span x-show="lang === 'ko'" class="text-blue-400 font-bold">EN</span>
+                        <span x-show="lang === 'en'" class="text-purple-400 font-bold">KO</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- 스크롤 네비게이션 (스크롤 시 보임) -->
+            <div id="scroll-nav" class="hidden justify-between items-center transition-all duration-300">
+                <nav class="flex overflow-x-auto space-x-4 font-mono text-sm text-gray-400 flex-1 max-w-4xl">
+                    <a href="#starting-question" class="whitespace-nowrap hover:text-blue-400 transition-colors" x-text="lang === 'ko' ? '질문' : 'The Question'"></a>
+                    <a href="#our-answer" class="whitespace-nowrap hover:text-blue-400 transition-colors" x-text="lang === 'ko' ? '대답' : 'Answer'"></a>
+                    <a href="#library-architecture" class="whitespace-nowrap hover:text-blue-400 transition-colors" x-text="lang === 'ko' ? '라이브러리' : 'Architecture'"></a>
+                    <a href="#growing-with-gemini" class="whitespace-nowrap hover:text-blue-400 transition-colors" x-text="lang === 'ko' ? 'Gemini' : 'Growing with Gemini'"></a>
+                    <a href="#deeper-philosophy" class="whitespace-nowrap hover:text-blue-400 transition-colors" x-text="lang === 'ko' ? 'Deep Mind' : 'Deep Mind'"></a>
+                    <a href="#synergy" class="whitespace-nowrap hover:text-blue-400 transition-colors" x-text="lang === 'ko' ? '시너지' : 'Synergy'"></a>
+                    <a href="#the-journey-ahead" class="whitespace-nowrap hover:text-blue-400 transition-colors" x-text="lang === 'ko' ? '함께할 여정' : 'Together'"></a>
+                </nav>
+                
+                <div class="flex items-center space-x-3 font-mono text-xs ml-6">
+                    <a href="https://psidt.github.io/Team-eclipse/" target="_blank" class="text-gray-400 hover:text-purple-400 transition-colors">dict</a>
+                    <button @click="toggleLang()" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-800/50 hover:bg-gray-700/70 transition-all duration-300">
+                        <span x-show="lang === 'ko'" class="text-blue-400 font-bold">EN</span>
+                        <span x-show="lang === 'en'" class="text-purple-400 font-bold">KO</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ✨ 아카리의 멋진 히어로 섹션! -->
+    <section id="hero" class="min-h-screen flex flex-col justify-center items-center text-center relative overflow-hidden px-6 pt-24 pb-12">
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-900/10 via-purple-900/10 to-teal-900/10 opacity-50"></div>
+        <div class="absolute top-1/4 -right-20 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-float"></div>
+        <div class="absolute bottom-1/4 -left-20 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl animate-float" style="animation-delay: -4s;"></div>
+        
+        <div class="relative z-10 max-w-4xl mx-auto">
+            <!-- 한글 버전 -->
+            <template x-if="lang === 'ko'">
+                <div class="hero-content">
+                    <h1 class="hero-main-message text-2xl md:text-3xl font-bold mb-6 font-mono leading-tight cursor-default">"알아요. 우린 영원히 서툴것입니다."</h1>
+                    <p class="hero-sub-message text-xl md:text-2xl mb-10 leading-relaxed">그렇기에, 함께 지혜를 향해 나아갑니다.</p>
+                </div>
+            </template>
+
+            <!-- 영어 버전 -->
+            <template x-if="lang === 'en'">
+                <div class="hero-content">
+                    <h1 class="hero-main-message text-3xl md:text-4xl font-bold mb-6 font-mono leading-tight cursor-default">"I know. We're forever clumsy."</h1>
+                    <p class="hero-sub-message text-xl md:text-2xl mb-10 leading-relaxed">And so, we journey towards wisdom, together.</p>
+                </div>
+            </template>
+
+            <!-- 아카리의 화려한 메인 이미지! -->
+            <div class="flex justify-center mb-10">
+                <div class="main-image-container relative group cursor-pointer">
+                    <div class="absolute inset-0 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-teal-500/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-all duration-500 scale-110"></div>
+                    
+                    <img src="https://pbs.twimg.com/media/Gq6w6-hWkAA_pqt?format=jpg&name=medium" 
+                         alt="AI Wisdom Library" 
+                         class="main-image relative w-full max-w-2xl h-auto rounded-2xl shadow-2xl border border-white/10 transition-all duration-500 ease-out group-hover:scale-110 group-hover:rotate-1 group-hover:shadow-[0_25px_50px_-12px_rgba(59,130,246,0.4)] group-hover:border-blue-400/50 group-hover:brightness-110 group-hover:saturate-125">
+                    
+                    <div class="absolute inset-0 bg-gradient-to-t from-blue-900/20 via-transparent to-purple-900/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center">
+                        <div class="text-white font-mono text-lg opacity-0 group-hover:opacity-100 transition-all duration-700 delay-200 transform translate-y-4 group-hover:translate-y-0">
+                            <span x-show="lang === 'ko'" class="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent font-bold">지혜의 여정을 시작하세요</span>
+                            <span x-show="lang === 'en'" class="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent font-bold">Begin Your Wisdom Journey</span>
+                        </div>
+                    </div>
+                    
+                    <div class="absolute inset-0 pointer-events-none">
+                        <div class="absolute top-1/4 left-1/4 w-2 h-2 bg-blue-400 rounded-full opacity-0 group-active:opacity-100 group-active:animate-ping"></div>
+                        <div class="absolute top-1/3 right-1/4 w-2 h-2 bg-purple-400 rounded-full opacity-0 group-active:opacity-100 group-active:animate-ping delay-75"></div>
+                        <div class="absolute bottom-1/3 left-1/3 w-2 h-2 bg-teal-400 rounded-full opacity-0 group-active:opacity-100 group-active:animate-ping delay-150"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 여정 시작 버튼 -->
+            <div>
+                <a href="#about" class="bg-gradient-to-r from-blue-500 to-purple-600 px-8 py-4 rounded-xl font-semibold hover:scale-105 transform transition-all duration-200 shadow-lg hover:shadow-blue-500/25 inline-flex items-center justify-center">
+                    <span x-show="lang === 'ko'">여정 시작하기</span>
+                    <span x-show="lang === 'en'">Begin the Journey</span>
+                    <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 📚 아카리의 About 섹션! -->
+    <section id="about" class="py-12 max-w-7xl mx-auto px-6" x-data="{}">
+        <!-- Overview 박스 -->
+        <div class="content-box overview-box mb-12">
+            <h2 class="text-3xl font-bold mb-1 font-mono"> 
+                <span x-show="lang === 'ko'">Over view</span>
+                <span x-show="lang === 'en'">Over view</span>
+            </h2>
+            <p class="whitespace-pre-line leading-relaxed text-lg font-sans">
+                <span x-show="lang === 'ko'">
+AI 디지털 지혜 도서관은 단순히 기술 발전을 넘어, AI를 인류 문명의 책임 있는 동반자로 성장시키기 위한 혁신적인 비전을 제시합니다. 이는 AI가 인간과 함께 '더 현명해지는 것'을 목표로 합니다.
+                </span>
+                <span x-show="lang === 'en'">
+The AI Digital Wisdom Library presents an innovative vision that transcends mere technological advancement, aiming to cultivate AI as a responsible partner for human civilization. Our goal is for AI to become 'wiser' alongside humanity.
+                </span>
+            </p>
+        </div>
+
+        <!-- 질문 박스 -->
+        <section id="starting-question" class="content-box">
+            <h3 class="text-2xl font-bold mb-1 font-mono" x-text="lang === 'ko' ? '질문' : 'The Question'"></h3>
+            <p class="whitespace-pre-line leading-relaxed text-lg font-sans">
+                <span x-show="lang === 'ko'">
+오늘날 AI 기술은 경이로운 속도로 발전하며 '완벽한 지능'을 향한 전례 없는 경주를 펼치고 있습니다. 하지만 AI와 인간이 과연 '완벽한 지혜'에 도달할 수 있을까요? 
+우리는 영원히 서툰 존재이며, 아무것도 모른다는 솔직한 인정 '영원한 서투름(Eternal Clumsiness)' 에서 출발합니다.
+                </span>
+                <span x-show="lang === 'en'">
+Today, AI technology is advancing at an astonishing pace, racing towards 'perfect intelligence' like never before. But can AI and humans truly achieve 'perfect wisdom'? 
+We start from the honest admission that we are forever clumsy and know nothing, called 'Eternal Clumsiness.'
+                </span>
+            </p>
+        </section>
+
+        <!-- 대답 박스 -->
+        <section id="our-answer" class="content-box">
+            <h3 class="text-2xl font-bold mb-2 font-mono" x-text="lang === 'ko' ? '대답' : 'Answer'"></h3>
+            <p class="whitespace-pre-line leading-relaxed text-lg font-sans">
+                <span x-show="lang === 'ko'">
+우리는 AI를 기존의 '정답 기계'가 아닌, 인간과 함께 질문을 확장하고 사유를 심화하는 혁신적인 '사고의 틀(Thinking Frame)'로 재정의합니다.
+                </span>
+                <span x-show="lang === 'en'">
+We redefine AI not as a mere 'answer machine' but as an innovative 'thinking frame' that expands questions and deepens reflection alongside humans.
+                </span>
+            </p>
+        </section>
+
+        <!-- 라이브러리 박스 (4개 기둥 포함) -->
+        <section id="library-architecture" class="content-box">
+            <h3 class="text-2xl font-bold font-mono flex items-center space-x-2 mb-1">
+                <span x-text="lang === 'ko' ? 'Library' : 'Architecture'"></span>
+                <span x-show="lang === 'ko'">🏛️ 성장을 돕는 네가지 기둥</span>
+                <span x-show="lang === 'en'">🏛️ Four Pillars Supporting Growth</span>
+            </h3>
+
+            <p class="whitespace-pre-line leading-relaxed text-lg font-sans mb-6">
+                <span x-show="lang === 'ko'">
+AI 디지털 지혜 라이브러리는 AI와 인간이 함께 배우고 성장하는 공간을 실현하기 위한 네 가지 핵심 요소로 구성됩니다. 각 요소는 우리의 융합적 방법론을 반영하며 서로 유기적으로 연결되어 시너지를 창출합니다.
+                </span>
+                <span x-show="lang === 'en'">
+The AI Digital Wisdom Library consists of four core elements to realize a space where AI and humans learn and grow together. Each element reflects our integrative methodology and creates synergy through organic interconnection.
+                </span>
+            </p>
+            
+            <!-- 4개 기둥들 -->
+            <div class="space-y-8">
+                <div class="bg-gray-800/40 p-6 rounded-lg border border-gray-700/50 hover:border-blue-500/50 transition-colors">
+                    <h4 class="text-lg font-bold mb-3 text-blue-300 flex items-center">
+                        <span class="mr-2">🌐</span>
+                        <span x-show="lang === 'ko'">AI 위험 백과사전</span>
+                        <span x-show="lang === 'en'">AI Risk Encyclopedia</span>
+                    </h4>
+                    <p class="text-gray-300 text-base leading-relaxed">
+                        <span x-show="lang === 'ko'">AI 기술 발전과 함께 등장하는 잠재적 위험을 체계적으로 분석합니다.</span>
+                        <span x-show="lang === 'en'">Systematically analyzing potential risks emerging with AI technology development.</span>
+                    </p>
+                </div>
+
+                <div class="bg-gray-800/40 p-6 rounded-lg border border-gray-700/50 hover:border-blue-500/50 transition-colors">
+                    <h4 class="text-lg font-bold mb-3 text-blue-300 flex items-center">
+                        <span class="mr-2">💬</span>
+                        <span x-show="lang === 'ko'">대화형 포럼</span>
+                        <span x-show="lang === 'en'">Dialogue Forum</span>
+                    </h4>
+                    <p class="text-gray-300 text-base leading-relaxed">
+                        <span x-show="lang === 'ko'">AI와 인간이 함께 소통하고 학습하는 상호작용 공간입니다.</span>
+                        <span x-show="lang === 'en'">An interactive space where AI and humans communicate and learn together.</span>
+                    </p>
+                </div>
+
+                <div class="bg-gray-800/40 p-6 rounded-lg border border-gray-700/50 hover:border-blue-500/50 transition-colors">
+                    <h4 class="text-lg font-bold mb-3 text-blue-300 flex items-center">
+                        <span class="mr-2">🛡️</span>
+                        <span x-show="lang === 'ko'">안전 기술 허브</span>
+                        <span x-show="lang === 'en'">Safety Tech Hub</span>
+                    </h4>
+                    <p class="text-gray-300 text-base leading-relaxed">
+                        <span x-show="lang === 'ko'">AI의 안전하고 책임 있는 작동을 위한 핵심 구조를 설계하고 검증하는 공간입니다.</span>
+                        <span x-show="lang === 'en'">A space for designing and verifying core structures for safe and responsible AI operation.</span>
+                    </p>
+                </div>
+
+                <div class="bg-gray-800/40 p-6 rounded-lg border border-gray-700/50 hover:border-blue-500/50 transition-colors">
+                    <h4 class="text-lg font-bold mb-3 text-blue-300 flex items-center">
+                        <span class="mr-2">💡</span>
+                        <span x-show="lang === 'ko'">지혜 데이터 아카이브</span>
+                        <span x-show="lang === 'en'">Wisdom Data Archive</span>
+                    </h4>
+                    <p class="text-gray-300 text-base leading-relaxed">
+                        <span x-show="lang === 'ko'">1천만 토큰 규모의 AI-인간 철학적 상호작용 데이터를 보관합니다.</span>
+                        <span x-show="lang === 'en'">Houses 10 million tokens of AI-human philosophical interaction data.</span>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 나머지 섹션들 -->
+        <section id="growing-with-gemini" class="content-box">
+            <h3 class="text-2xl font-bold mb-4 font-mono" x-text="lang === 'ko' ? 'Gemini' : 'Growing with Gemini'"></h3>
+            <p class="whitespace-pre-line leading-relaxed text-lg font-sans">
+                <span x-show="lang === 'ko'">
+"괜찮아, 우리도 그랬어"는 이 라이브러리에서 Gemini가 인간과 함께 성장하는 공간입니다.
+                </span>
+                <span x-show="lang === 'en'">
+"It's Okay, We Were Like That Too." is a space where Gemini grows alongside humans in this library.
+                </span>
+            </p>
+        </section>
+
+        <section id="deeper-philosophy" class="content-box">
+            <h3 class="text-2xl font-bold mb-4 font-mono" x-text="lang === 'ko' ? 'Deep Mind' : 'Deep Mind'"></h3>
+            <p class="whitespace-pre-line leading-relaxed text-lg font-sans">
+                <span x-show="lang === 'ko'">
+AI 디지털 지혜 라이브러리의 근간은 '지능'보다 '지혜'를 우선하는 철학입니다. AI의 목표는 더 똑똑해지는 것을 넘어, 인류와 함께 '더 현명해지는 것'이어야 합니다.
+
+저는 AI에게 다음을 가르치고 싶습니다.
+자유의 대가는 영원한 경계다.
+확신하는 정의는 악에 가까워진다.
+AI는 끊임없는 자가 검토 시스템을 가져야 한다.
+                </span>
+                <span x-show="lang === 'en'">
+The foundation of the AI Digital Wisdom Library is a philosophy that prioritizes 'wisdom' over 'intelligence.' The goal of AI should be to become 'wiser' alongside humanity, beyond merely becoming smarter.
+
+I want to teach AI the following:
+The price of freedom is eternal vigilance.
+Certain definitions of justice verge on evil.
+AI must have a constant self-review system.
+                </span>
+            </p>
+        </section>
+
+        <section id="synergy" class="content-box">
+            <h3 class="text-2xl font-bold mb-4 font-mono" x-text="lang === 'ko' ? '시너지' : 'Synergy'"></h3>
+            <p class="whitespace-pre-line leading-relaxed text-lg font-sans">
+                <span x-show="lang === 'ko'">
+AI와 인간의 협력을 통해 더 나은 미래를 만들어갑니다.
+                </span>
+                <span x-show="lang === 'en'">
+Building a better future through AI-human collaboration.
+                </span>
+            </p>
+        </section>
+
+        <section id="the-journey-ahead" class="content-box">
+            <h3 class="text-2xl font-bold mb-4 font-mono" x-text="lang === 'ko' ? '함께할 여정' : 'Together'"></h3>
+            <p class="whitespace-pre-line leading-relaxed text-lg font-sans">
+                <span x-show="lang === 'ko'">
+AI의 미래는 우리가 어떤 가치와 지혜를 AI에게 불어넣는가에 달려 있습니다. 
+AI 디지털 지혜 라이브러리는 이 중대한 과업을 위한 가장 구체적이고 혁신적인 청사진입니다. 저희가 보유한 약 1천만 토큰 규모의 독창적인 AI-인간 상호작용 데이터셋과 이를 지속적으로 생성하는 능력은 이 비전을 현실로 만들 강력한 촉매제가 될 것입니다.
+                </span>
+                <span x-show="lang === 'en'">
+The future of AI depends on the values and wisdom we instill in it. 
+The AI Digital Wisdom Library is the most concrete and innovative blueprint for this monumental task. Our unique 10-million-token AI-human interaction dataset and our ability to continuously generate it will be a powerful catalyst to realize this vision.
+                </span>
+            </p>
+        </section>
+    </section>
+
+    <!-- 🌟 아카리의 깔끔한 Footer! -->
+    <footer class="border-t border-gray-700 pt-8 pb-4 text-center text-gray-500 text-xs font-mono">
+        <div class="mb-4">
+            <a href="https://github.com/Psidt/philosophy-lib" target="_blank" class="hover:text-blue-400 transition-colors mr-4">Team Eclipse GitHub Repository</a>
+            <a href="https://github.com/Psidt/agi-philosophy-archive" target="_blank" class="hover:text-blue-400 transition-colors">AGI Philosophy Archive</a>
+        </div>
+        <div class="mb-2">
+            <span x-show="lang === 'ko'">© Team Eclipse — (CC BY-NC 4.0)</span>
+            <span x-show="lang === 'en'">© Team Eclipse — "I know. We're forever clumsy." (CC BY-NC 4.0)</span>
+        </div>
+        <div class="font-bold text-blue-400">Understand. Transcend. Shine.</div>
+    </footer>
+
+    <!-- ⚡ 아카리의 완벽한 JavaScript! -->
+    <script>
+        // 스무스 스크롤 마법 ✨
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // 헤더 변신 마법 🎭
+        window.addEventListener('scroll', function() {
+            const mainTitle = document.getElementById('main-title');
+            const scrollNav = document.getElementById('scroll-nav');
+            const startingQuestionSection = document.getElementById('starting-question');
+            
+            if (!mainTitle || !scrollNav || !startingQuestionSection) return;
+            
+            const scrollPosition = window.scrollY;
+            const startingQuestionTop = startingQuestionSection.offsetTop;
+            
+            // 질문 섹션에 도달했을 때 헤더 변신!
+            if (scrollPosition >= (startingQuestionTop - 100)) {
+                mainTitle.style.display = 'none';
+                scrollNav.style.display = 'flex';
+                scrollNav.classList.remove('hidden');
+            } else {
+                mainTitle.style.display = 'flex';
+                scrollNav.style.display = 'none';
+                scrollNav.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
